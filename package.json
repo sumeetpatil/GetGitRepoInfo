@@ -1,0 +1,23 @@
+{
+  "name": "getgitrepoinfo",
+  "version": "1.0.0",
+  "description": "Get Git Repo Info like stars, watchers and more",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sumeetpatil/GetGitRepoInfo.git"
+  },
+  "author": "sumeet patil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sumeetpatil/GetGitRepoInfo/issues"
+  },
+  "homepage": "https://github.com/sumeetpatil/GetGitRepoInfo#readme",
+  "dependencies": {
+    "exceljs": "^4.1.1",
+    "sync-request": "^6.1.0"
+  }
+}

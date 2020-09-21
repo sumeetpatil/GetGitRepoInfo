@@ -1,7 +1,7 @@
 # GitRepositoryInfo
-Get Github Repository Information like stars, watchers, open issues and forks
+Get Github Repository Information like stars, watchers, open issues, forks and last pushed date
 
-This is a nodejs commandline tool which reads Github Repositories from the excel file [git_repos.xlsx](./git_repos.xlsx) and creates a file [output.xlsx](./output.xlsx) with Github Repository Information for each Repository like stars, watchers, open issues and forks.
+This is a nodejs commandline tool which reads Github Repositories from the excel file [git_repos.xlsx](./git_repos.xlsx) and creates a file [output.xlsx](./output.xlsx) with Github Repository Information for each Repository like stars, watchers, open issues, forks and last pushed date.
 
 ### Format
 ```sh

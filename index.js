@@ -20,6 +20,7 @@ let stars = ["Stars"];
 let watchers = ["Watchers"];
 let forks = ["Forks"];
 let open_issues = ["Open Issues"];
+let last_updated = ["Last Updated"];
 
 workbookReader.on('worksheet', worksheet => {
   worksheet.on('row', row => {
@@ -53,14 +54,14 @@ workbookReader.on('end', () => {
 	var completed_requests = 0;
 	var request = require('sync-request');
 	var headers = {};
-	if(process.length>4){
+	if(process.argv.length>4){
 		var auth = 'Basic ' + Buffer.from( process.argv[3]+ ':' + process.argv[4]).toString('base64');
 		headers = {'user-agent':'node.js', 'Authorization':auth};
 
 	}else{
 		headers = {'user-agent':'node.js'};
 	}
-
+	//API Calls
 	for (i in urls) {
 	    if(urls[i]!=null){
 		console.log("API CALL - "+ urls[i]);
@@ -73,18 +74,21 @@ workbookReader.on('end', () => {
 			forks.push(json.forks_count);
 			watchers.push(json.subscribers_count);
 			open_issues.push(json.open_issues_count);
+			last_updated.push(json.pushed_at);
 		}catch(err){
 			console.log(err);
 			stars.push(null);
 			forks.push(null);
 			watchers.push(null);
 			open_issues.push(null);
+			last_updated.push(null);
 		}
 	    }else{
 	        stars.push(null);
                 forks.push(null);
                 watchers.push(null);
                 open_issues.push(null);	
+                last_updated.push(null);	
 	    }
 	}
 
@@ -93,6 +97,7 @@ workbookReader.on('end', () => {
 	worksheet.getColumn(3).values = watchers;
 	worksheet.getColumn(4).values = forks;
 	worksheet.getColumn(5).values = open_issues;
+	worksheet.getColumn(6).values = last_updated;
 	workbook.xlsx
 	    .writeFile("output.xlsx")
 	    .then(

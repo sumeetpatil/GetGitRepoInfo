@@ -21,6 +21,7 @@ let watchers = ["Watchers"];
 let forks = ["Forks"];
 let open_issues = ["Open Issues"];
 let last_updated = ["Last Updated"];
+let license = ["License"]
 
 workbookReader.on('worksheet', worksheet => {
   worksheet.on('row', row => {
@@ -64,17 +65,18 @@ workbookReader.on('end', () => {
 	//API Calls
 	for (i in urls) {
 	    if(urls[i]!=null){
-		console.log("API CALL - "+ urls[i]);
+		console.log("API CALL - "+ urls[i] + " number " + i);
 		try{
 			var res = request('GET', urls[i], {
 			  headers: headers,
 			});
-			var json = JSON.parse(res.getBody().toString('utf8'));	
+			var json = JSON.parse(res.getBody().toString('utf8'));
 			stars.push(json.stargazers_count);
 			forks.push(json.forks_count);
 			watchers.push(json.subscribers_count);
 			open_issues.push(json.open_issues_count);
 			last_updated.push(json.pushed_at);
+			license.push(json.license!=null?json.license.spdx_id:null);
 		}catch(err){
 			console.log(err);
 			stars.push(null);
@@ -82,13 +84,15 @@ workbookReader.on('end', () => {
 			watchers.push(null);
 			open_issues.push(null);
 			last_updated.push(null);
+			license.push(null);
 		}
 	    }else{
 	        stars.push(null);
                 forks.push(null);
                 watchers.push(null);
-                open_issues.push(null);	
-                last_updated.push(null);	
+                open_issues.push(null);
+                last_updated.push(null);
+                license.push(null);
 	    }
 	}
 
@@ -98,6 +102,7 @@ workbookReader.on('end', () => {
 	worksheet.getColumn(4).values = forks;
 	worksheet.getColumn(5).values = open_issues;
 	worksheet.getColumn(6).values = last_updated;
+	worksheet.getColumn(7).values = license;
 	workbook.xlsx
 	    .writeFile("output.xlsx")
 	    .then(

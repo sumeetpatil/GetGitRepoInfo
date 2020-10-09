@@ -6,7 +6,7 @@ This is a nodejs commandline tool which reads Github Repositories from the excel
 
 ### Installation
 1. Install node js
-2. run npm install
+2. Run `npm install`
 
 ### Help
 ```sh
